@@ -1,1 +1,51 @@
-<p>available-rides works!</p>
+<div class="card">
+
+  <div class="navA"> 
+    <h2>Available Rides</h2>
+    <button (click)="goBack()" class="back-btn">Add New Ride</button>
+  </div>
+
+  
+  
+  
+
+
+  <div>
+    <label>
+    Vehicle Type Filter
+    </label>
+   <select [(ngModel)]="filterType" (change)="load()">
+      <option value="All">All</option>
+      <option value="Car">Car</option>
+      <option value="Bike">Bike</option>
+    </select>
+  </div>
+
+  <div> 
+    <label>
+    Your Employee ID (to book)
+    </label>
+   <input type="text" [(ngModel)]="bookingEmployeeId" />
+
+  </div>
+  <div>
+     <ul>
+    <li *ngFor="let r of rides">
+      <div>
+        <b>{{r.vehicleType}} ({{r.vehicleNo}})</b><br>
+        {{r.pickupPoint}} → {{r.destination}} <br>
+        Seats: {{r.vacantSeats}} <br>
+        Time: {{r.time | date:'shortTime'}}
+      </div>
+
+      <button (click)="bookRide(r.id)">Book</button>
+    </li>
+  </ul> 
+
+  </div>
+
+ 
+
+  <p class="success" *ngIf="message">{{ message }}</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>

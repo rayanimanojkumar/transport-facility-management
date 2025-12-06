@@ -1,1 +1,83 @@
-<p>add-ride works!</p>
+<div class="card">
+  <div class="navb">
+    <h2>Add New Ride</h2>
+    <button (click)="goToAvailableRides()">View Available Rides</button>
+  </div>
+
+
+
+
+  <form [formGroup]="rideForm" (ngSubmit)="submitRide()">
+
+    <div class="grid">
+
+      <div class="field">
+        <label>Employee ID</label>
+        <input type="text" formControlName="ownerEmployeeId" />
+        <span class="err" *ngIf="f['ownerEmployeeId'].touched && f['ownerEmployeeId'].invalid">
+          Required
+        </span>
+      </div>
+
+      <div class="field">
+        <label>Vehicle Type</label>
+        <select formControlName="vehicleType">
+          <option *ngFor="let v of vehicleTypes">{{ v }}</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Vehicle Number</label>
+        <input type="text" formControlName="vehicleNo" />
+        <span class="err" *ngIf="f['vehicleNo'].touched && f['vehicleNo'].invalid">
+          Required
+        </span>
+      </div>
+
+      <div class="field">
+        <label>Vacant Seats</label>
+        <input type="number" min="1" formControlName="vacantSeats" />
+        <span class="err" *ngIf="f['vacantSeats'].touched && f['vacantSeats'].invalid">
+          Must be at least 1
+        </span>
+      </div>
+
+      <div class="field">
+        <label>Time</label>
+        <input type="datetime-local" formControlName="time" [min]="todayMin" [max]="todayMax" />
+        <span class="err" *ngIf="f['time'].touched && f['time'].invalid">
+          Required
+        </span>
+      </div>
+
+      <div class="field">
+        <label>Pickup Point</label>
+        <input type="text" formControlName="pickupPoint" />
+        <span class="err" *ngIf="f['pickupPoint'].touched && f['pickupPoint'].invalid">
+          Required
+        </span>
+      </div>
+
+      <div class="field">
+        <label>Destination</label>
+        <input type="text" formControlName="destination" />
+        <span class="err" *ngIf="f['destination'].touched && f['destination'].invalid">
+          Required
+        </span>
+      </div>
+
+    </div>
+
+    <div>
+        <p class="success" *ngIf="message">{{ message }}</p>
+        <p class="error" *ngIf="error && rideForm.invalid">{{ error }}</p>
+    </div>
+
+    <div class="btn-wrapper">
+      <button type="submit">Add Ride</button>
+    </div>
+
+   
+
+  </form>
+</div>
