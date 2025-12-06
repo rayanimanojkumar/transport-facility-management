@@ -47,9 +47,15 @@ export class AvailableRidesComponent implements OnInit {
     try {
       this.rideService.bookRide(rideId, this.bookingEmployeeId.trim());
       this.message = 'Ride booked successfully!';
+      setTimeout(() => {
+        this.message='';
+      }, 3000);
       this.load(); 
     } catch (err:any) {
       this.error = err.message;
+      setTimeout(() => {
+      this.error = '';
+      }, 3000);
     }
   }
 }
